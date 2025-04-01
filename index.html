@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delícia & Sabor - Cardápio Completo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #FF6B6B;
+            --primary-hover: #E05555;
+            --secondary-color: #FFD166;
+            --dark-color: #333333;
+            --light-color: #F8F9FA;
+            --text-color: #333333;
+            --text-light: #6C757D;
+            --white: #FFFFFF;
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--light-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Layout */
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        .section {
+            padding: 5rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2.5rem;
+            position: relative;
+            color: var(--dark-color);
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: var(--primary-color);
+            margin: 1rem auto;
+        }
+
+        .menu-category-title {
+            font-size: 1.8rem;
+            margin: 3rem 0 1.5rem;
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--secondary-color);
+            padding-bottom: 0.5rem;
+        }
+
+        /* Header */
+        .header {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 1.5rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .header.scrolled {
+            padding: 1rem 0;
+            background-color: rgba(255, 107, 107, 0.95);
+            backdrop-filter: blur(10px);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            color: var(--white);
+        }
+
+        .logo i {
+            margin-right: 0.8rem;
+            font-size: 2rem;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-item {
+            margin-left: 2.5rem;
+        }
+
+        .nav-link {
+            color: var(--white);
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .nav-link:hover {
+            color: var(--secondary-color);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--secondary-color);
+            bottom: 0;
+            left: 0;
+            transition: var(--transition);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+            font-size: 1.8rem;
+            color: var(--white);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                        url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: var(--white);
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2.5rem;
+            font-weight: 300;
+        }
+
+        /* Botões */
+        .btn {
+            display: inline-block;
+            background: var(--primary-color);
+            color: var(--white);
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: var(--shadow);
+        }
+
+        .btn:hover {
+            background: var(--primary-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary-color);
+            color: var(--white);
+        }
+
+        /* Menu Section */
+        .menu {
+            background-color: var(--light-color);
+        }
+
+        .menu-category {
+            margin-bottom: 4rem;
+        }
+
+        .menu-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .menu-item {
+            background-color: var(--white);
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .menu-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .menu-item-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+
+        .menu-item-title {
+            font-size: 1.3rem;
+            color: var(--dark-color);
+            font-weight: 600;
+        }
+
+        .menu-item-price {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .menu-item-desc {
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+
+        /* Cadastro Section */
+        .register {
+            background-color: var(--white);
+            padding: 5rem 0;
+        }
+
+        .register-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: var(--light-color);
+            padding: 2.5rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+
+        .register-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--primary-color);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.2);
+        }
+
+        .form-group textarea {
+            height: 120px;
+            resize: vertical;
+        }
+
+        .form-actions {
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        /* Responsividade */
+        @media (max-width: 992px) {
+            .hero-title {
+                font-size: 3rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+            
+            .nav-menu {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background: var(--primary-color);
+                flex-direction: column;
+                align-items: center;
+                padding: 2rem 0;
+                transition: var(--transition);
+            }
+            
+            .nav-menu.active {
+                left: 0;
+            }
+            
+            .nav-item {
+                margin: 1rem 0;
+            }
+            
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+
+            .menu-items {
+                grid-template-columns: 1fr;
+            }
+
+            .register-container {
+                padding: 1.5rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .section {
+                padding: 3rem 0;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .menu-category-title {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container header-container">
+            <a href="#" class="logo">
+                <i class="fas fa-utensils"></i>
+                <span>Delícia & Sabor</span>
+            </a>
+            <div class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+            <nav>
+                <ul class="nav-menu">
+                    <li class="nav-item"><a href="#home" class="nav-link">Início</a></li>
+                    <li class="nav-item"><a href="#menu" class="nav-link">Cardápio</a></li>
+                    <li class="nav-item"><a href="#register" class="nav-link">Cadastre-se</a></li>
+                    <li class="nav-item"><a href="#contact" class="nav-link">Contato</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container hero-content">
+            <h1 class="hero-title">Sabores para Todos os Paladares</h1>
+            <p class="hero-subtitle">Descubra nossa variedade de pratos cuidadosamente preparados</p>
+            <div>
+                <a href="#menu" class="btn">Ver Cardápio</a>
+                <a href="#register" class="btn btn-outline" style="margin-left: 1rem;">Cadastre-se</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section class="section menu" id="menu">
+        <div class="container">
+            <h2 class="section-title">Cardápio Completo</h2>
+            
+            <!-- Entradas -->
+            <div class="menu-category">
+                <h3 class="menu-category-title">Entradas</h3>
+                <div class="menu-items">
+                    <div class="menu-item">
+                        <div class="menu-item-header">
+                            <h4 class="menu-item-title">Bruschettas Italianas</h4>
+                            <span class="menu-item-price">R$ 28,90</span>
+                        </div>
+                        <p class="menu-item-desc">Pão italiano grelhado com tomate fresco, manjericão, alho e azeite de oliva extra virgem.</p>
+                    </div>
+                    
+                    <div class="menu-item">
+                        <div class="menu-item-header">
+                            <h4 class="menu-item-title">Carpaccio de Filé</h4>
+                            <span class="menu-item-price">R$ 42,50</span>
+                        </div>
+                        <p class="menu-item-desc">Finas fatias de filé mignon cru marinado, com rúcula, parmesão e molho de mostarda.</p>
+                    </div>
+                    
+                    <div class="menu-item">
+                        <div class="menu-item-header">
+                            <h4 class="menu-item-title">Camarão Empanado</h4>
+                            <span class="menu-item-price">R$ 49,90</span>
+                        </div>
+                        <p class="menu-item-desc">Camarões médios empanados e fritos, servidos com molho agridoce e gergelim.</p>
+                    </div>
+                    
+                    <div class="menu-item">
+                        <div class="menu-item-header">
+                            <h4 class="menu-item-title">Salada Caprese</h4>
+                            <span class="menu-item-price">R$ 35,90</span>
+                        </div>
+                        <p class="menu-item-desc">Tomate, mussarela de búfala e manjericão fresco, regados com azeite e redução balsâmica.</p>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="menu-item-header">
+                            <h4 class="menu-item-title">Bolinhos de Bacalhau</h4>
+                            <span class="menu-item-price">R$ 39,90</span>
+                        </div>
+                        <p class="menu-item-desc">Deliciosos bolinhos de bacalhau desfiado, batata e temperos, servidos com molho tártaro.</p>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="menu-item-header">
+                            <h4 class="menu-item-title">Ceviche de Peixe</h4>
+                            <span class="menu-item-price">R$ 45,90</span>
+                        </div>
+                        <p class="menu-item-desc">Peixe branco marinado em limão, com cebola roxa, coentro e pimenta dedo-de-moça.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Pratos Principais -->
+            <div class="menu-category">
+                <h3 class="menu-category-title">Pratos Principais</h3>
+                <div class="menu-items">
+                    <div class="menu-item">
+                        <div class="menu-item-header">
+                            <h4 class="menu-item-title">Filé Mignon Especial</h4>
+                            <span class="menu-item-price">R$ 89,90</span>
+                        </div>
+                        <p class="menu-item-desc">Corte nobre grelhado no ponto perfeito, acompanhado de purê de batatas trufado e legumes grelhados.</p>
+                    </div>
+                    
+                    <div class="menu-item">
+                        <div class="menu-item-header">
+                            <h4 class="menu-item-title">Risoto de Funghi</h4>
+                            <span class="menu-item-price">R$ 65,90</span>
+                        </div>
+                        <p class="menu-item-desc">Risoto cremoso com cogumelos frescos, finalizado com trufa negra e queijo parmesão.</p>
+                    </div>
+                    
+                    <div class="menu-item">
+                        <div class="menu-item-header">
+                            <h4 class="menu-item-title">Salmão Grelhado</h4>
+                            <span class="menu-item-price">R$ 78,50</span>
+                        </div>
+                        <p class="menu-item-desc">Salmão fresco grelhado com crosta de ervas, acompanhado de arroz negro e aspargos.</p>
+                    </div>
+                    
+                    <div class="menu-item">
+                        <div class="menu-item-header">
+                            <h4 class="menu-item-title">Frango à Parmegiana</h4>
+                            <span class="menu-item-price">R$ 58,90</span>
+                        </div>
+                        <p class="menu-item-desc">Peito de frango empanado, coberto com molho de tomate caseiro e queijo derretido, acompanhado de arroz.</p>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="menu-item-header">
+                            <h4 class="menu-item-title">Peixe ao Molho de Maracujá</h4>
+                            <span class="menu-item-price">R$ 72,90</span>
+                        </div>
+                        <p class="menu-item-desc">Filé de peixe grelhado com molho agridoce de maracujá, acompanhado de arroz de coco.</p>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="menu-item-header">
+                            <h4 class="menu-item-title">Lasanha à Bolonhesa</h4>
+                            <span class="menu-item-price">R$ 62,90</span>
+                        </div>
+                        <p class="menu-item-desc">Camadas de massa, molho bolonhesa e queijo derretido, gratinada no forno.</p>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="menu-item-header">
+                            <h4 class="menu-item-title">Penne ao Molho Pesto</h4>
+                            <span class="menu-item-price">R$ 52,90</span>
+                        </div>
+                        <p class="menu-item-desc">Massa penne com molho pesto de manjericão fresco, pinoli e parmesão, finalizado com tomate seco.</p>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="menu-item-header">
+                            <h4 class="menu-item-title">Feijoada Completa</h4>
+                            <span class="menu-item-price">R$ 68,90</span>
+                        </div>
+                        <p class="menu-item-desc">O clássico brasileiro com todas as carnes, acompanhado de arroz, couve, farofa e laranja.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Saladas -->
+            <div class="menu-category">
+                <h3 class="menu-category-title">Saladas</h3>
+                <div class="menu-items">
+                    <div class="menu-item">
+                        <div class="menu-item-header">
+                            <h4 class="menu-item-title">Salada Mediterrânea</h4>
+                            <span class="menu-item-price">R$ 42,90</span>
+                        </div>
+                        <p class="menu-item-desc">Mix de folhas, tomate cereja, pepino, azeitonas, queijo feta e molho de iogurte com ervas.</p>
+                    </div>
+                    
+                    <div class="menu-item">
+                        <div class="menu-item-header">
+                            <h4 class="menu-item-title">Salada Caesar</h4>
+                            <span class="menu-item-price">R$ 38,90</span>
+                        </div>
+                        <p class="menu-item-desc">Alface romana, croutons, parmesão e molho caesar tradicional, com opção de frango grelhado.</p>
+                    </div>
+                    
+                    <div class="menu-item">
+                        <div class="menu-item-header">
+                            <h4 class="menu-item-title">Salada Tropical</h4>
+                            <span class="menu-item-price">R$ 45,90</span>
+                        </div>
+                        <p class="menu-item-desc">Mix de folhas, manga, abacate, castanha de caju e molho de mel e mostarda.</p>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="menu-item-header">
+                            <h4 class="menu-item-title">Salada de Quinoa</h4>
+                            <span class="menu-item-price">R$ 39,90</span>
+                        </div>
+                        <p class="menu-item-desc">Quinoa, grão-de-bico, tomate seco, rúcula e molho de limão siciliano.</p>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="menu-item-header">
+                            <h4 class="menu-item-title">Salada Grega</h4>
+                            <span class="menu-item-price">R$ 43,90</span>
+                        </div>
+                        <p class="menu-item-desc">Tomate, pepino, pimentão, cebola roxa, azeitonas e queijo feta com molho de ervas.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Sobremesas -->
+            <div class="menu-category">
+                <h3 class="menu-category-title">Sobremesas</h3>
+                <div class="menu-items">
+                    <div class="menu-item">
+                        <div class="menu-item-header">
+                            <h4 class="menu-item-title">Cheesecake de Frutas Vermelhas</h4>
+                            <span class="menu-item-price">R$ 28,90</span>
+                        </div>
+                        <p class="menu-item-desc">Torta de cheesecake cremosa com calda de frutas vermelhas e crocante de amêndoas.</p>
+                    </div>
+                    
+                    <div class="menu-item">
+                        <div class="menu-item-header">
+                            <h4 class="menu-item-title">Brownie com Sorvete</h4>
+                            <span class="menu-item-price">R$ 24,90</span>
+                        </div>
+                        <p class="menu-item-desc">Brownie de chocolate meio amargo servido quente com bola de sorvete de baunilha e calda de chocolate.</p>
+                    </div>
+                    
+                    <div class="menu-item">
+                        <div class="menu-item-header">
+                            <h4 class="menu-item-title">Mousse de Maracujá</h4>
+                            <span class="menu-item-price">R$ 22,90</span>
+                        </div>
+                        <p class="menu-item-desc">Mousse leve e aerado de maracujá com calda da fruta e raspas de chocolate branco.</p>
+                    </div>
+                    
+                    <div class="menu-item">
+                        <div class="menu-item-header">
+                            <h4 class="menu-item-title">Pudim de Leite</h4>
+                            <span class="menu-item-price">R$ 19,90</span>
+                        </div>
+                        <p class="menu-item-desc">Clássico pudim de leite condensado com calda de caramelo, feito no forno.</p>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="menu-item-header">
+                            <h4 class="menu-item-title">Torta de Limão</h4>
+                            <span class="menu-item-price">R$ 26,90</span>
+                        </div>
+                        <p class="menu-item-desc">Massa crocante de biscoito, recheio cremoso de limão e merengue italiano.</p>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="menu-item-header">
+                            <h4 class="menu-item-title">Petit Gateau</h4>
+                            <span class="menu-item-price">R$ 32,90</span>
+                        </div>
+                        <p class="menu-item-desc">Bolinho de chocolate com recheio cremoso, acompanhado de sorvete de baunilha.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Bebidas -->
+            <div class="menu-category">
+                <h3 class="menu-category-title">Bebidas</h3>
+                <div class="menu-items">
+                    <div class="menu-item">
+                        <div class="menu-item-header">
+                            <h4 class="menu-item-title">Drinks Especiais</h4>
+                            <span class="menu-item-price">R$ 32,90</span>
+                        </div>
+                        <p class="menu-item-desc">Seleção de drinks autorais preparados com ingredientes premium e técnicas exclusivas.</p>
+                    </div>
+                    
+                    <div class="menu-item">
+                        <div class="menu-item-header">
+                            <h4 class="menu-item-title">Vinhos Selecionados</h4>
+                            <span class="menu-item-price">A partir de R$ 28,90</span>
+                        </div>
+                        <p class="menu-item-desc">Carta de vinhos nacionais e importados harmonizados com nossos pratos (preço por taça ou garrafa).</p>
+                    </div>
+                    
+                    <div class="menu-item">
+                        <div class="menu-item-header">
+                            <h4 class="menu-item-title">Sucos Naturais</h4>
+                            <span class="menu-item-price">R$ 14,90</span>
+                        </div>
+                        <p class="menu-item-desc">Sucos frescos preparados na hora com frutas da estação (laranja, abacaxi, maracujá, morango).</p>
+                    </div>
+                    
+                    <div class="menu-item">
+                        <div class="menu-item-header">
+                            <h4 class="menu-item-title">Cafés Especiais</h4>
+                            <span class="menu-item-price">A partir de R$ 9,90</span>
+                        </div>
+                        <p class="menu-item-desc">Seleção de cafés gourmet servidos em diferentes métodos (expresso, cappuccino, cold brew).</p>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="menu-item-header">
+                            <h4 class="menu-item-title">Refrigerantes Artesanais</h4>
+                            <span class="menu-item-price">R$ 12,90</span>
+                        </div>
+                        <p class="menu-item-desc">Refrigerantes naturais em sabores diferenciados (guaraná, limão siciliano, ginger beer).</p>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="menu-item-header">
+                            <h4 class="menu-item-title">Chás Premium</h4>
+                            <span class="menu-item-price">R$ 11,90</span>
+                        </div>
+                        <p class="menu-item-desc">Seleção de chás especiais servidos quentes ou gelados (camomila, verde, hibisco, frutas vermelhas).</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Register Section -->
+    <section class="register" id="register">
+        <div class="container">
+            <div class="register-container">
+                <h2 class="register-title">Cadastre-se</h2>
+                <form id="registration-form">
+                    <div class="form-group">
+                        <label for="name">Nome Completo</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone">Telefone</label>
+                        <input type="tel" id="phone" name="phone" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="birthdate">Data de Nascimento</label>
+                        <input type="date" id="birthdate" name="birthdate">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="address">Endereço</label>
+                        <input type="text" id="address" name="address">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="preferences">Preferências Alimentares</label>
+                        <select id="preferences" name="preferences" multiple>
+                            <option value="vegetariano">Vegetariano</option>
+                            <option value="vegano">Vegano</option>
+                            <option value="sem-gluten">Sem Glúten</option>
+                            <option value="sem-lactose">Sem Lactose</option>
+                            <option value="low-carb">Low Carb</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="newsletter">
+                            <input type="checkbox" id="newsletter" name="newsletter" checked>
+                            Desejo receber novidades e promoções por email
+                        </label>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="submit" class="btn">Cadastrar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Menu toggle for mobile
+        document.querySelector('.menu-toggle').addEventListener('click', function() {
+            document.querySelector('.nav-menu').classList.toggle('active');
+            this.querySelector('i').classList.toggle('fa-times');
+        });
+
+        // Close menu when clicking on a link
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function() {
+                document.querySelector('.nav-menu').classList.remove('active');
+                document.querySelector('.menu-toggle i').classList.remove('fa-times');
+            });
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Add shadow to header on scroll
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Form submission
+        document.getElementById('registration-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Cadastro realizado com sucesso! Em breve você receberá nossas novidades.');
+            this.reset();
+        });
+    </script>
+</body>
+</html>
